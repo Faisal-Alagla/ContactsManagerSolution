@@ -3,15 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34003.232
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactsManager.UI", "ContactsManager.UI\ContactsManager.UI.csproj", "{4B62D022-0560-4148-9122-48A69BCF9336}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactsManager.UI", "ContactsManager.UI\ContactsManager.UI.csproj", "{4B62D022-0560-4148-9122-48A69BCF9336}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{84A4ACC8-0F69-45CC-A230-38F756C74F13}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{D2EA8490-3BA6-4BE4-B240-4A203D94FA1D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactsManager.Core", "ContactsManager.Core\ContactsManager.Core.csproj", "{94E39F4A-3D91-4434-B10A-E16E744FCE06}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactsManager.Core", "ContactsManager.Core\ContactsManager.Core.csproj", "{94E39F4A-3D91-4434-B10A-E16E744FCE06}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactsManager.Infrastructure", "ContactsManager.Infrastructure\ContactsManager.Infrastructure.csproj", "{76AD06B1-FADF-476A-9618-87586EB882D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactsManager.Infrastructure", "ContactsManager.Infrastructure\ContactsManager.Infrastructure.csproj", "{76AD06B1-FADF-476A-9618-87586EB882D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactsManager.ServiceTests", "ContactsManager.ServiceTests\ContactsManager.ServiceTests.csproj", "{27E35277-C68E-4DA1-A7FD-6EBDD427D1F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactsManager.ControllerTests", "ContactsManager.ControllerTests\ContactsManager.ControllerTests.csproj", "{EE796FAD-144C-4749-9782-BC0BB3380D12}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactsManager.IntegrationTests", "ContactsManager.IntegrationTests\ContactsManager.IntegrationTests.csproj", "{DE391C95-5806-4D74-B2F6-45BFDCE110C7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +37,18 @@ Global
 		{76AD06B1-FADF-476A-9618-87586EB882D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76AD06B1-FADF-476A-9618-87586EB882D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76AD06B1-FADF-476A-9618-87586EB882D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27E35277-C68E-4DA1-A7FD-6EBDD427D1F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27E35277-C68E-4DA1-A7FD-6EBDD427D1F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27E35277-C68E-4DA1-A7FD-6EBDD427D1F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27E35277-C68E-4DA1-A7FD-6EBDD427D1F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE796FAD-144C-4749-9782-BC0BB3380D12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE796FAD-144C-4749-9782-BC0BB3380D12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE796FAD-144C-4749-9782-BC0BB3380D12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE796FAD-144C-4749-9782-BC0BB3380D12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE391C95-5806-4D74-B2F6-45BFDCE110C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE391C95-5806-4D74-B2F6-45BFDCE110C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE391C95-5806-4D74-B2F6-45BFDCE110C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE391C95-5806-4D74-B2F6-45BFDCE110C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -39,6 +57,9 @@ Global
 		{4B62D022-0560-4148-9122-48A69BCF9336} = {84A4ACC8-0F69-45CC-A230-38F756C74F13}
 		{94E39F4A-3D91-4434-B10A-E16E744FCE06} = {84A4ACC8-0F69-45CC-A230-38F756C74F13}
 		{76AD06B1-FADF-476A-9618-87586EB882D8} = {84A4ACC8-0F69-45CC-A230-38F756C74F13}
+		{27E35277-C68E-4DA1-A7FD-6EBDD427D1F7} = {D2EA8490-3BA6-4BE4-B240-4A203D94FA1D}
+		{EE796FAD-144C-4749-9782-BC0BB3380D12} = {D2EA8490-3BA6-4BE4-B240-4A203D94FA1D}
+		{DE391C95-5806-4D74-B2F6-45BFDCE110C7} = {D2EA8490-3BA6-4BE4-B240-4A203D94FA1D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CF356685-B37E-4576-AF3E-796E99B5A192}
