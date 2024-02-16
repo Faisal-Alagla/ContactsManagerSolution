@@ -1,4 +1,5 @@
-﻿using CRUD_Example.Filters.ResultFilters;
+﻿using ContactsManager.Core.ServiceContracts;
+using CRUD_Example.Filters.ResultFilters;
 using Entities;
 using Microsoft.EntityFrameworkCore;
 using Repositories;

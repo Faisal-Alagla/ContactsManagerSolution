@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace CRUD_Example.Filters.ActionFilters
+namespace ContactsManager.UI.Filters.ActionFilters
 {
     public class ResponseHeaderActionFilter : /*IAsyncActionFilter, IOrderedFilter*/ ActionFilterAttribute
     {

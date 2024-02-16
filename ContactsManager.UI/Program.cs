@@ -1,8 +1,8 @@
 using Serilog;
-using CRUD_Example.Filters.ActionFilters;
 using CRUD_Example;
 using CRUD_Example.Middleware;
 using ContactsManager.Core.ServiceContracts.PersonsServiceContracts;
+using ContactsManager.UI.Filters.ActionFilters;
 
 var builder = WebApplication.CreateBuilder(args);
 

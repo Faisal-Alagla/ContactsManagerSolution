@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ContactsManager.Core.ServiceContracts;
+using Microsoft.AspNetCore.Mvc;
 using ServiceContracts;
 
 namespace CRUD_Example.Controllers

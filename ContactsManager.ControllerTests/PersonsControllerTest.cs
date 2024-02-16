@@ -1,4 +1,5 @@
 ﻿using AutoFixture;
+using ContactsManager.Core.ServiceContracts;
 using Moq;
 using ServiceContracts;
 //using Xunit;

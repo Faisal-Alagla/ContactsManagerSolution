@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using ServiceContracts.DTO;
 using ServiceContracts.Enums;
 
-namespace CRUD_Example.Filters.ActionFilters
+namespace ContactsManager.UI.Filters.ActionFilters
 {
     public class PersonsListActionFilter : IActionFilter
     {
@@ -20,32 +20,30 @@ namespace CRUD_Example.Filters.ActionFilters
 
             PersonsController personsController = (PersonsController)context.Controller;
 
-            IDictionary<string, object?>? parameters = context.HttpContext.Items["arguments"] as IDictionary<string, object?>;
-
-            if (parameters != null)
+            if (context.HttpContext.Items["arguments"] is IDictionary<string, object?> parameters)
             {
-                if (parameters.ContainsKey("CurrentSearchBy"))
+                if (parameters.TryGetValue("CurrentSearchBy", out var parameter))
                 {
-                    personsController.ViewBag["CurrentSearchBy"] = Convert.ToString(parameters["CurrentSearchBy"]);
+                    personsController.ViewBag["CurrentSearchBy"] = Convert.ToString(parameter);
                 }
 
-                if (parameters.ContainsKey("CurrentSearchString"))
+                if (parameters.TryGetValue("CurrentSearchString", out var parameter1))
                 {
-                    personsController.ViewBag["CurrentSearchString"] = Convert.ToString(parameters["CurrentSearchString"]);
+                    personsController.ViewBag["CurrentSearchString"] = Convert.ToString(parameter1);
                 }
 
-                if (parameters.ContainsKey("CurrentSortBy"))
+                if (parameters.TryGetValue("CurrentSortBy", out var parameter2))
                 {
-                    personsController.ViewBag["CurrentSortBy"] = Convert.ToString(parameters["CurrentSortBy"]);
+                    personsController.ViewBag["CurrentSortBy"] = Convert.ToString(parameter2);
                 }
                 else
                 {
                     personsController.ViewBag["CurrentSortBy"] = nameof(PersonResponse.PersonName);
                 }
 
-                if (parameters.ContainsKey("CurrentSortOrder"))
+                if (parameters.TryGetValue("CurrentSortOrder", out var parameter3))
                 {
-                    personsController.ViewBag["CurrentSortOrder"] = Convert.ToString(parameters["CurrentSortOrder"]);
+                    personsController.ViewBag["CurrentSortOrder"] = Convert.ToString(parameter3);
                 }
                 else
                 {

@@ -1,5 +1,5 @@
-﻿using CRUD_Example.Filters;
-using CRUD_Example.Filters.ActionFilters;
+﻿using ContactsManager.Core.ServiceContracts;
+using CRUD_Example.Filters;
 using CRUD_Example.Filters.AuthorizationFilters;
 using CRUD_Example.Filters.ExceptionFilters;
 using CRUD_Example.Filters.ResourceFilters;
@@ -11,6 +11,7 @@ using ServiceContracts;
 using ServiceContracts.DTO;
 using ServiceContracts.Enums;
 using ContactsManager.Core.ServiceContracts.PersonsServiceContracts;
+using ContactsManager.UI.Filters.ActionFilters;
 
 namespace CRUD_Example.Controllers
 {
