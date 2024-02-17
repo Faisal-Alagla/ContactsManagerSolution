@@ -4,10 +4,12 @@ using Entities;
 using Microsoft.EntityFrameworkCore;
 using Repositories;
 using RepositoryContracts;
-using ServiceContracts;
 using Services;
 using ContactsManager.Core.ServiceContracts.PersonsServiceContracts;
 using ContactsManager.Core.Services.PersonsServices;
+using ContactsManager.Core.Domain.IdentityEntities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace CRUD_Example
 {
@@ -46,6 +48,8 @@ namespace CRUD_Example
 
             //Have to do this for IFilterFactory (check its file)
             services.AddTransient<PersonsListResultFilter>();
+
+            services.AddIdentity<ApplicationUser, ApplicationRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders().AddUserStore<UserStore<ApplicationUser, ApplicationRole, ApplicationDbContext, Guid>>().AddRoleStore<RoleStore<ApplicationRole, ApplicationDbContext, Guid>>();
 
             return services;
         }
