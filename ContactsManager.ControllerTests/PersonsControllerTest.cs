@@ -1,6 +1,6 @@
 ﻿using AutoFixture;
 using Moq;
-using ServiceContracts;
+using ContactsManager.Core.ServiceContracts;
 //using Xunit;
 using FluentAssertions;
 using CRUD_Example.Controllers;
