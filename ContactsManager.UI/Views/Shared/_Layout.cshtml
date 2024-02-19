@@ -34,9 +34,28 @@
                                 }
                                 else
                                 {
-                                    <li>
-                                        <a asp-controller="Account" asp-action="Register">Register</a>
-                                    </li>
+                                    @if (ViewBag.CurrentUtl == "~/Account/Register")
+                                    {
+                                        <li>
+                                            <a asp-controller="Account" asp-action="Register" class="nav-active">Register</a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li>
+                                            <a asp-controller="Account" asp-action="Register">Register</a>
+                                        </li>
+                                    }
+                                    @if (ViewBag.CurrentUtl == "~/Account/Login")
+                                    {
+                                        <li>
+                                            <a asp-controller="Account" asp-action="Login" class="nav-active">Login</a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+
+                                    }
                                     <li>
                                         <a asp-controller="Account" asp-action="Login">Login</a>
                                     </li>
@@ -48,10 +67,30 @@
             </div>
             <div class="navbar mb">
                 <ul>
-                    <li>
-                        <a asp-controller="Persons" asp-action="Index">Persons</a>
-                        <a asp-controller="Countries" asp-action="UploadFromExcel">Upload Countries</a>
-                    </li>
+                    @if (ViewBag.CurrentUtl == "~/Persons/Index")
+                    {
+                        <li>
+                            <a asp-controller="Persons" asp-action="Index" class="nav-active">Persons</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a asp-controller="Persons" asp-action="Index">Persons</a>
+                        </li>
+                    }
+                    @if (ViewBag.CurrentUtl == "~/Countries/UploadFromExcel")
+                    {
+                        <li>
+                            <a asp-controller="Countries" asp-action="UploadFromExcel" class="nav-active">Upload Countries</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a asp-controller="Countries" asp-action="UploadFromExcel">Upload Countries</a>
+                        </li>
+                    }
                 </ul>
             </div>
         </div>
