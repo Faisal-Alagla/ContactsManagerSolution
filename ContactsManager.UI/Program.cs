@@ -78,8 +78,11 @@ if (!builder.Environment.IsEnvironment("Test"))
 
 app.UseHttpLogging();
 app.UseStaticFiles();
-app.UseAuthentication(); //reading identity cookie
+
+//the following must be in the same order:
 app.UseRouting(); //identifying action method based on route
+app.UseAuthentication(); //reading identity cookie
+app.UseAuthorization(); //access permissions of the user
 app.MapControllers(); //execute filter pipeline (action methods + filters)
 
 app.Run();

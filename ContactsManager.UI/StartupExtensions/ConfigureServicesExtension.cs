@@ -10,6 +10,7 @@ using ContactsManager.Core.Services.PersonsServices;
 using ContactsManager.Core.Domain.IdentityEntities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CRUD_Example
 {
@@ -18,13 +19,6 @@ namespace CRUD_Example
         //extension method to extend the IServiceCollection type
         public static IServiceCollection ConfigureServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddHttpLogging(options =>
-            {
-                //http logging options here
-                options.LoggingFields = Microsoft.AspNetCore.HttpLogging.HttpLoggingFields.RequestProperties;
-                options.LoggingFields = Microsoft.AspNetCore.HttpLogging.HttpLoggingFields.ResponsePropertiesAndHeaders;
-            });
-
             //adding services into IoC container
             services.AddScoped<ICountriesRepository, CountriesRepository>();
             services.AddScoped<IPersonsRepository, PersonsRepository>();
@@ -36,6 +30,7 @@ namespace CRUD_Example
             services.AddScoped<IPersonsUpdaterService, PersonsUpdaterService>();
             services.AddScoped<IPersonsSorterService, PersonsSorterService>();
             services.AddScoped<IPersonsDeleterService, PersonsDeleterService>();
+            services.AddTransient<PersonsListResultFilter>();
 
             services.AddDbContext<ApplicationDbContext>(options =>
             {
@@ -47,7 +42,6 @@ namespace CRUD_Example
             //services.AddTransient<TokenResultFilter>();
 
             //Have to do this for IFilterFactory (check its file)
-            services.AddTransient<PersonsListResultFilter>();
 
             services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
             {
@@ -62,6 +56,24 @@ namespace CRUD_Example
                 .AddDefaultTokenProviders()
                 .AddUserStore<UserStore<ApplicationUser, ApplicationRole, ApplicationDbContext, Guid>>()
                 .AddRoleStore<RoleStore<ApplicationRole, ApplicationDbContext, Guid>>();
+
+            services.AddAuthorization(options =>
+            {
+                //enforce authorization policy (user must be logged in) for all action methods
+                options.FallbackPolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+            });
+            //incase the user isn't authenticated, redirect to login:
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Account/Login";
+            });
+
+            services.AddHttpLogging(options =>
+            {
+                //http logging options here
+                options.LoggingFields = Microsoft.AspNetCore.HttpLogging.HttpLoggingFields.RequestProperties;
+                options.LoggingFields = Microsoft.AspNetCore.HttpLogging.HttpLoggingFields.ResponsePropertiesAndHeaders;
+            });
 
             return services;
         }
