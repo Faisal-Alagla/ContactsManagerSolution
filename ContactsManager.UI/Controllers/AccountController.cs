@@ -7,7 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ContactsManager.UI.Controllers
 {
-    [Route("[controller]/[action]")]
+    //Without the route attribute, conventional routing is applied (check program.cs)
+    //[Route("[controller]/[action]")]
     [AllowAnonymous]
     public class AccountController : Controller
     {

@@ -85,6 +85,15 @@ app.UseAuthentication(); //reading identity cookie
 app.UseAuthorization(); //access permissions of the user
 app.MapControllers(); //execute filter pipeline (action methods + filters)
 
+//Attribute routing is what's done on controllers to define how to reach each one (the default)
+//the following is Conventional routing (lec. 321)
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller}/{action}/{id?}"
+        );
+});
 app.Run();
 
 //making it partial so that we can access the program class anywhwere in the application (e.g. integration tests)
