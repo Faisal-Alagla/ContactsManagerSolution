@@ -100,5 +100,17 @@ namespace ContactsManager.UI.Controllers
 
             return RedirectToAction(nameof(PersonsController.Index), "PersonsController");
         }
+
+        //used by the Remote Validation
+        public async Task<IActionResult> IsEmailAlreadyRegistered(string email)
+        {
+            ApplicationUser user = await _userManager.FindByEmailAsync(email);
+
+            if (user is not null)
+            {
+                return Json(true);
+            }
+            return Json(false);
+        }
     }
 }
