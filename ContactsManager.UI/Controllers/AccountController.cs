@@ -59,5 +59,39 @@ namespace ContactsManager.UI.Controllers
                 return View(registerDTO);
             }
         }
+
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginDTO loginDTO)
+        {
+            if (ModelState.IsValid is false)
+            {
+                ViewBag.Errors = ModelState.Values.SelectMany(temp => temp.Errors).Select(temp => temp.ErrorMessage);
+
+                return View(loginDTO);
+            }
+
+            var result = await _signInManager.PasswordSignInAsync(loginDTO.Email, loginDTO.Password, isPersistent: true, lockoutOnFailure: false);
+
+            if (result.Succeeded)
+            {
+                return RedirectToAction(nameof(PersonsController.Index), "PersonsController");
+            }
+
+            ModelState.AddModelError("Login", "Invalid user credentials");
+
+            return View(loginDTO);
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+
+            return RedirectToAction(nameof(PersonsController.Index), "PersonsController");
+        }
     }
 }
