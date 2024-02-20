@@ -49,7 +49,7 @@ namespace ContactsManager.UI.Controllers
             {
                 await _signInManager.SignInAsync(user, isPersistent: true);
 
-                return RedirectToAction(nameof(PersonsController.Index), "PersonsController");
+                return RedirectToAction(nameof(PersonsController.Index), "Persons");
             }
             else
             {
@@ -68,7 +68,7 @@ namespace ContactsManager.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginDTO loginDTO)
+        public async Task<IActionResult> Login(LoginDTO loginDTO, string? returnUrl)
         {
             if (ModelState.IsValid is false)
             {
@@ -81,7 +81,12 @@ namespace ContactsManager.UI.Controllers
 
             if (result.Succeeded)
             {
-                return RedirectToAction(nameof(PersonsController.Index), "PersonsController");
+                if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                {
+                    return LocalRedirect(returnUrl);
+                }
+
+                return RedirectToAction(nameof(PersonsController.Index), "Persons");
             }
 
             ModelState.AddModelError("Login", "Invalid user credentials");
