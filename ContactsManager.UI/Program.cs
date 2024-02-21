@@ -89,6 +89,14 @@ app.MapControllers(); //execute filter pipeline (action methods + filters)
 //the following is Conventional routing (lec. 321)
 app.UseEndpoints(endpoints =>
 {
+    //specific to areas
+    endpoints.MapControllerRoute(
+        name: "areas",
+        pattern: "{area:exists}/{controller=Home}/{action=Index}" //here: ":exists" means it's a mandatory parameter (area here)
+        //"=..." is default .. e.g. /Admin will route to /Admin/Home/Index
+        );
+
+    //general
     endpoints.MapControllerRoute(
         name: "default",
         pattern: "{controller}/{action}/{id?}"
