@@ -76,6 +76,9 @@ if (!builder.Environment.IsEnvironment("Test"))
     Rotativa.AspNetCore.RotativaConfiguration.Setup("wwwroot", wkhtmltopdfRelativePath: "Rotativa");
 }
 
+app.UseHsts(); //forces https
+app.UseHttpsRedirection(); //enable https
+
 app.UseHttpLogging();
 app.UseStaticFiles();
 
@@ -93,7 +96,7 @@ app.UseEndpoints(endpoints =>
     endpoints.MapControllerRoute(
         name: "areas",
         pattern: "{area:exists}/{controller=Home}/{action=Index}" //here: ":exists" means it's a mandatory parameter (area here)
-        //"=..." is default .. e.g. /Admin will route to /Admin/Home/Index
+                                                                  //"=..." is default .. e.g. /Admin will route to /Admin/Home/Index
         );
 
     //general
