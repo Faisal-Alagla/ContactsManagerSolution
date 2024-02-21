@@ -10,7 +10,7 @@ namespace ContactsManager.UI.Controllers
 {
     //Without the route attribute, conventional routing is applied (check program.cs)
     //[Route("[controller]/[action]")]
-    [AllowAnonymous]
+    //[AllowAnonymous]
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -24,12 +24,15 @@ namespace ContactsManager.UI.Controllers
             _roleManager = roleManager;
         }
 
+        //using the added custom policy (in ConfigureServicesExtenstion)
+        [Authorize("NotAuthenticated")]
         public IActionResult Register()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize("NotAuthenticated")]
         public async Task<IActionResult> Register(RegisterDTO registerDTO)
         {
             if (!ModelState.IsValid)
@@ -85,12 +88,14 @@ namespace ContactsManager.UI.Controllers
             }
         }
 
+        [Authorize("NotAuthenticated")]
         public IActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize("NotAuthenticated")]
         public async Task<IActionResult> Login(LoginDTO loginDTO, string? returnUrl)
         {
             if (ModelState.IsValid is false)
@@ -125,6 +130,7 @@ namespace ContactsManager.UI.Controllers
             return View(loginDTO);
         }
 
+        [Authorize]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();

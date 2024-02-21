@@ -61,6 +61,18 @@ namespace CRUD_Example
             {
                 //enforce authorization policy (user must be logged in) for all action methods
                 options.FallbackPolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+
+                //custom policy
+                options.AddPolicy("NotAuthenticated", policy =>
+                {
+                    //when applied to a controller / action method, it allows non-logged in users only
+                    //e.g. can be used for login / register
+                    policy.RequireAssertion(context =>
+                    {
+                        //return true if the user is not logged in
+                        return context.User.Identity.IsAuthenticated is false;
+                    });
+                });
             });
             //incase the user isn't authenticated, redirect to login:
             services.ConfigureApplicationCookie(options =>
