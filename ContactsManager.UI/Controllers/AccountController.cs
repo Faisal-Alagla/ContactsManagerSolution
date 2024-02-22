@@ -33,6 +33,9 @@ namespace ContactsManager.UI.Controllers
 
         [HttpPost]
         [Authorize("NotAuthenticated")]
+        //[ValidateAntiForgeryToken] //to prevent XSRF attacks (not: tag helpers are needed for this)
+                                   //So in API projects we have to do it manually (e.g. using Antiforgey.GetAndStoreTokens())
+                                   //Not: we can apply it globally (check ConfigureServicesExtensions)
         public async Task<IActionResult> Register(RegisterDTO registerDTO)
         {
             if (!ModelState.IsValid)
@@ -69,6 +72,14 @@ namespace ContactsManager.UI.Controllers
                 }
                 else
                 {
+                    //if the user role doesn't exist in the db, create it
+                    if (await _roleManager.FindByIdAsync(UserTypeOptions.User.ToString()) is null)
+                    {
+                        ApplicationRole applicationRole = new() { Name = UserTypeOptions.User.ToString() };
+
+                        await _roleManager.CreateAsync(applicationRole);
+                    }
+
                     //add the user into the user role
                     await _userManager.AddToRoleAsync(user, UserTypeOptions.User.ToString());
                 }
@@ -138,6 +149,7 @@ namespace ContactsManager.UI.Controllers
             return RedirectToAction(nameof(PersonsController.Index), "PersonsController");
         }
 
+        [AllowAnonymous]
         //used by the Remote Validation
         public async Task<IActionResult> IsEmailAlreadyRegistered(string email)
         {

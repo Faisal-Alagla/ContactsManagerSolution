@@ -11,6 +11,8 @@ using ContactsManager.Core.Domain.IdentityEntities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using ContactsManager.UI.Filters.ActionFilters;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CRUD_Example
 {
@@ -19,6 +21,22 @@ namespace CRUD_Example
         //extension method to extend the IServiceCollection type
         public static IServiceCollection ConfigureServices(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddControllersWithViews(options =>
+            {
+                //adding a global filter
+                //if we're not supplying any parameters to the filter class, we can use this and provide the order as following
+                //options.Filters.Add<ResponseHeaderActionFilter>(5);
+
+                //var logger = builder.Services.BuildServiceProvider().GetRequiredService<ILogger<ResponseHeaderActionFilter>>();
+
+                //order = 2 (IOrderedFilter)
+                options.Filters.Add(new ResponseHeaderActionFilter(/*logger,*/ "Some-Key", "Some-Value", 2));
+
+                //Applying AntiForgeryToken globally for all post requests
+                //note: use AutoValidateAntiforgeryTokenAttribute instead of ValidateAntiforgeryTokenAttribute to avoid using it on get requests
+                options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+            });
+
             //adding services into IoC container
             services.AddScoped<ICountriesRepository, CountriesRepository>();
             services.AddScoped<IPersonsRepository, PersonsRepository>();
